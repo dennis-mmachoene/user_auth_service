@@ -1,0 +1,60 @@
+/* AuthForm styling */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .input-container {
+    position: relative;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border-color: #0056b3;
+    background-color: #fff;
+  }
+  
+  .error-message {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    color: red;
+    font-size: 0.875rem;
+  }
+  
+  .submit-btn {
+    padding: 1rem;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #00408d;
+  }
+  
+  .submit-btn:focus {
+    outline: none;
+  }
+  
+  @media (max-width: 480px) {
+    .auth-form {
+      padding: 1rem;
+    }
+  }
+  

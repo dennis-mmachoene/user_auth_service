@@ -1,0 +1,51 @@
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: ./Dockerfile # Path to your Dockerfile for the frontend
+    ports:
+      - "3000:3000"  # Map frontend container port 3000 to host port 3000
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile # Path to your Dockerfile for the backend
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: example
+      DB_NAME: your_db_name
+      JWT_SECRET: your_jwt_secret
+    ports:
+      - "5000:5000"  # Map backend container port 5000 to host port 5000
+    depends_on:
+      - mysql
+    volumes:
+      - ./backend/.env:/app/.env  # Mount the .env file into the backend container
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: your_db_name
+    ports:
+      - "3306:3306"  # Expose MySQL port to the host
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local
