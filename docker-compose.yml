@@ -2,8 +2,8 @@
 services:
   frontend:
     build:
-      context: .
-      dockerfile: ./Dockerfile # Path to your Dockerfile for the frontend
+      context: ./frontend  # Path to the frontend directory
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"  # Map frontend container port 3000 to host port 3000
     depends_on:
@@ -13,14 +13,14 @@ services:
 
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile # Path to your Dockerfile for the backend
+      context: ./backend  # Path to the backend directory
+      dockerfile: Dockerfile
     environment:
-      DB_HOST: mysql
-      DB_USER: root
-      DB_PASSWORD: example
-      DB_NAME: your_db_name
-      JWT_SECRET: your_jwt_secret
+       DB_NAME: user_auth
+       DB_USER: root
+       DB_PASSWORD: root
+       DB_HOST: db  # Connects to MySQL service
+       JWT_SECRET: user_security_auth
     ports:
       - "5000:5000"  # Map backend container port 5000 to host port 5000
     depends_on:
@@ -36,7 +36,7 @@ services:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: your_db_name
     ports:
-      - "3306:3306"  # Expose MySQL port to the host
+      - "3307:3306"  # Expose MySQL port to the host
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
